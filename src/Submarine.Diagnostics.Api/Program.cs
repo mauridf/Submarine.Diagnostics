@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers()
     .AddFluentValidation();
 
-builder.Services.AddValidatorsFromAssemblyContaining<DiagnosticReportValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<DiagnosticReportRequestValidator>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

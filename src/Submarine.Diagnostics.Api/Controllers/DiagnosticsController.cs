@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Submarine.Diagnostics.Api.Requests;
 using Submarine.Diagnostics.Application.UseCases;
 using Submarine.Diagnostics.Domain;
 
@@ -18,9 +19,9 @@ public class DiagnosticsController : ControllerBase
 
     [HttpPost("power-consumption")]
     public ActionResult<PowerConsumptionResult> Calculate(
-        [FromBody] IEnumerable<string> report)
+        [FromBody] DiagnosticReportRequest request)
     {
-        var result = _useCase.Execute(report);
+        var result = _useCase.Execute(request.Report);
         return Ok(result);
     }
 }

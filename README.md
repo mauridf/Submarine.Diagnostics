@@ -43,7 +43,9 @@ A aplicação segue uma **Clean Architecture simplificada**, com separação cla
 
 * **Clean Architecture (adaptada)**
 * **Use Case / Application Service**
-* **SOLID (DIP, SRP)**
+* **SOLID (SRP, DIP)**
+* **DTO para entrada de dados (API Boundary)**
+* **FluentValidation para validações de entrada**
 * **Imutabilidade com records**
 * **Testes unitários focados em regras de negócio**
 
@@ -51,14 +53,16 @@ A aplicação segue uma **Clean Architecture simplificada**, com separação cla
 
 ## ⚙️ Algoritmo Utilizado
 
-1. Recebe uma lista de números binários de mesmo tamanho
-2. Para cada posição do bit:
+1. A API recebe um **DTO (`DiagnosticReportRequest`)** contendo o relatório binário
+2. As validações são executadas automaticamente via **FluentValidation**
+3. O Controller delega o processamento ao **Use Case**
+4. Para cada posição do bit:
 
    * Conta a ocorrência de `0` e `1`
    * O bit mais comum compõe a **taxa Gama**
    * O bit menos comum compõe a **taxa Épsilon**
-3. Converte os valores binários para decimal
-4. Multiplica Gama × Épsilon → consumo de energia
+5. Os valores binários são convertidos para decimal
+6. O consumo de energia é calculado multiplicando Gama × Épsilon
 
 ---
 
@@ -76,9 +80,11 @@ Os testes unitários validam:
 
 ### API
 
+````bash
+dotnet run --project src/Submarine.Diagnostics.Api
 ```bash
 dotnet run --project src/Submarine.Diagnostics.Api
-```
+````
 
 Acesse:
 
@@ -90,6 +96,24 @@ https://localhost:5001/swagger
 
 ## 📥 Exemplo de Requisição
 
+````json
+POST /api/diagnostics/power-consumption
+{
+  "report": [
+    "00100",
+    "11110",
+    "10110",
+    "10111",
+    "10101",
+    "01111",
+    "00111",
+    "11100",
+    "10000",
+    "11001",
+    "00010",
+    "01010"
+  ]
+}
 ```json
 POST /api/diagnostics/power-consumption
 [
@@ -106,19 +130,25 @@ POST /api/diagnostics/power-consumption
   "00010",
   "01010"
 ]
-```
+````
 
 ---
 
 ## 📤 Exemplo de Resposta
 
+````json
+{
+  "gammaRate": 22,
+  "epsilonRate": 9,
+  "consumption": 198
+}
 ```json
 {
   "gammaRate": 22,
   "epsilonRate": 9,
   "consumption": 198
 }
-```
+````
 
 ---
 
