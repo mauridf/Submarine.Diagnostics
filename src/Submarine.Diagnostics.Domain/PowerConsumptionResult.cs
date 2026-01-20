@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Submarine.Diagnostics.Domain;
 
-namespace Submarine.Diagnostics.Domain
-{
-    internal class PowerConsumptionResult
-    {
-    }
-}
+public record PowerConsumptionResult(
+    int GammaRate,
+    int EpsilonRate,
+    int Consumption
+);

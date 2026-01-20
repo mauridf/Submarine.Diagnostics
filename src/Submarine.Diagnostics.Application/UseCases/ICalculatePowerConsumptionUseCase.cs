@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Submarine.Diagnostics.Domain;
 
-namespace Submarine.Diagnostics.Application.UseCases
+namespace Submarine.Diagnostics.Application.UseCases;
+
+public interface ICalculatePowerConsumptionUseCase
 {
-    internal interface ICalculatePowerConsumptionUseCase
-    {
-    }
+    PowerConsumptionResult Execute(IEnumerable<string> binaryNumbers);
 }

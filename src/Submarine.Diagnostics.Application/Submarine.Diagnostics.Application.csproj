@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Submarine.Diagnostics.Domain\Submarine.Diagnostics.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
